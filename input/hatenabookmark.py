@@ -26,9 +26,9 @@ class HatenaBookmark():
           for tag in entry['tags']:
               tags.append(tag.get('term', ''))
           if len(tags) > 0:
-              input_tag = ' #'.join(tags)
+              input_tag = tags
           else:
-              input_tag = ''
+              input_tag = []
       if "link" in entry:
         link = entry.link
       if link in input_dict: # already in the list from other input mod(s).

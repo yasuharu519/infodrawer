@@ -4,7 +4,9 @@
 import feedparser
 import urllib
 import sys
+import re
 from datetime import datetime
+HASH_TAG_PATTERN = r'#[a-zA-Z0-9]+'
 
 class Twitter():
   '''
@@ -46,8 +48,10 @@ class Twitter():
     for entry in fdp['entries']:
       title = ""
       link = ""
+      tags = []
       if "title" in entry:
         title = entry.title
+        tags = re.findall(HASH_TAG_PATTERN, title)
       if self.keyword and self.keyword not in title:
         continue
       if "link" in entry:
@@ -57,7 +61,7 @@ class Twitter():
       input_dict[link] = {'title':title,
                           'input_from':'Twitter Memo',
                           'input_date':d_str,
-                          'tag':''}
+                          'tag':tags}
     return input_dict
 
 def _test():

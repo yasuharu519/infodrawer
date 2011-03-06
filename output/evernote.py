@@ -36,7 +36,7 @@ class Evernote():
         else:
             self.note = None
         if 'tag' in conf:
-            self.tag = conf['tag']
+            self.tag = [conf['tag']]
         else:
             self.tag = None
         if 'twitter_account' in conf:
@@ -63,7 +63,7 @@ class Evernote():
                 if self.tag:
                     evernote_tag = self.tag
                 else:
-                    evernote_tag = ''
+                    evernote_tag = []
                 if value.has_key("has_url"):
                     if value["has_url"]:
                         contents = value['contents']
@@ -81,7 +81,7 @@ class Evernote():
             if evernote_note:
                 subject = subject + " @" + evernote_note
             if evernote_tag:
-                subject = subject + " #"+ evernote_tag
+                subject = subject + "#" +  " #".join(evernote_tag)
             mail_o = mail.Mail(self.conf)
             mail_o.login()
             msg = mail_o.create_HTML_message(self.from_addr,

@@ -118,7 +118,7 @@ class History():
                           value['title'],
                           value['input_date'],
                           value['input_from'],
-                          value['tag']))
+                          str(value['tag'])))
       self.conn.commit()
     finally:
       cur.close()
